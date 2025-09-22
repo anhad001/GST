@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GST – 7 Years Performance Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    /* Add fade + hide styles */
+    main .card {
+      display: none;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    main .card.visible {
+      display: block;
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+<header>
+  <h1>GST – 7 Years Performance Dashboard</h1>
+</header>
+
+<nav class="sidebar">
+  <ul>
+    <li><a href="#registrations">Registrations</a></li>
+    <li><a href="#taxpayers">Active Taxpayers</a></li>
+    <li><a href="#returns">Returns</a></li>
+    <li><a href="#payments">Payments</a></li>
+    <li><a href="#revenue">Revenue by Business</a></li>
+  </ul>
+</nav>
+
+<main>
+  <!-- Registrations -->
+  <section id="registrations" class="card visible">
+    <h2>Registration Trend (Apr’22 – Jun’24)</h2>
+    <canvas id="regChart"></canvas>
+  </section>
+
+  <!-- Taxpayers -->
+  <section id="taxpayers" class="card">
+    <h2>Active Taxpayers as on 30 Jun 2024</h2>
+    <ul>
+      <li>Normal Taxpayers: <strong>1,28,47,531</strong></li>
+      <li>Composition: <strong>15,08,099</strong></li>
+      <li>Input Service Distributor: <strong>8,127</strong></li>
+      <li>Tax Collector @ Source: <strong>21,301</strong></li>
+      <li>Tax Deductor @ Source: <strong>3,04,441</strong></li>
+      <li>Others: <strong>3,552</strong></li>
+    </ul>
+  </section>
+
+  <!-- Returns -->
+  <section id="returns" class="card">
+    <h2>Total Returns Filed (Cumulative)</h2>
+    <canvas id="returnsChart"></canvas>
+  </section>
+
+  <!-- Payments -->
+  <section id="payments" class="card">
+    <h2>Payments Collected 2023-24 (₹ Crore)</h2>
+    <canvas id="payChart"></canvas>
+  </section>
+
+  <!-- Revenue -->
+  <section id="revenue" class="card">
+    <h2>Revenue Share by Business Constitution</h2>
+    <canvas id="revChart"></canvas>
+  </section>
+</main>
+
+<script>
+/* === Chart Data === */
+const regLabels = ['Apr 22','Jun 22','Sep 22','Dec 22','Mar 23','Jun 23','Sep 23','Dec 23','Mar 24','Jun 24'];
+const regData   = [3500000,7000000,10500000,14000000,17500000,20000000,22500000,25000000,27000000,27500000];
+
+new Chart(document.getElementById('regChart'), {
+  type:'line',
+  data:{ labels:regLabels,
+    datasets:[{label:'Active Registrations',data:regData,borderColor:'#2563eb',fill:false}]},
+  options:{responsive:true}
+});
+
+new Chart(document.getElementById('returnsChart'), {
+  type:'bar',
+  data:{
+    labels:['FY17-18','FY18-19','FY19-20','FY20-21','FY21-22','FY22-23','FY23-24'],
+    datasets:[{label:'Returns Filed (Cr.)',data:[10,38,65,90,110,125,138.68],backgroundColor:'#10b981'}]
+  }
+});
+
+new Chart(document.getElementById('payChart'), {
+  type:'bar',
+  data:{
+    labels:['CGST','SGST','IGST','Comp. Cess'],
+    datasets:[{label:'2023-24 Collection',data:[375710,471195,1026789,144555],
+    backgroundColor:['#3b82f6','#06b6d4','#f59e0b','#ef4444']}]
+  },
+  options:{scales:{y:{title:{display:true,text:'₹ Crore'}}}}
+});
+
+new Chart(document.getElementById('revChart'), {
+  type:'doughnut',
+  data:{
+    labels:['Public Ltd (34%)','Private Ltd (28.7%)','Proprietorship (13.3%)','PSU (9.7%)','Partnership (7.3%)','Others'],
+    datasets:[{data:[34.06,28.72,13.3,9.72,7.31,6.89],
+    backgroundColor:['#6366f1','#0ea5e9','#10b981','#f59e0b','#ef4444','#94a3b8']}]
+  },
+  options:{plugins:{legend:{position:'bottom'}}}
+});
+
+/* === Sidebar Navigation === */
+document.querySelectorAll('.sidebar a').forEach(link=>{
+  link.addEventListener('click',e=>{
+    e.preventDefault();
+    const id = link.getAttribute('href').substring(1);
+    document.querySelectorAll('main .card').forEach(sec=>{
+      sec.classList.remove('visible');
+    });
+    document.getElementById(id).classList.add('visible');
+  });
+});
+</script>
+</body>
+</html>
