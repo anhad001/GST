@@ -1,4 +1,4 @@
-/* ========== RESET & BASE ========== */
+/* ===== Reset & Base ===== */
 * {
   margin: 0;
   padding: 0;
@@ -11,7 +11,7 @@ body {
   min-height: 100vh;
 }
 
-/* ========== HEADER ========== */
+/* ===== Header ===== */
 header {
   position: fixed;
   top: 0;
@@ -26,7 +26,7 @@ header {
   z-index: 1000;
 }
 
-/* ========== SIDEBAR ========== */
+/* ===== Sidebar ===== */
 .sidebar {
   position: fixed;
   top: 0;
@@ -34,7 +34,7 @@ header {
   bottom: 0;
   width: 220px;
   background: #111827;
-  padding-top: 70px; /* below header */
+  padding-top: 70px;
 }
 .sidebar ul {
   list-style: none;
@@ -51,24 +51,27 @@ header {
   color: #fff;
 }
 
-/* ========== MAIN CONTENT ========== */
+/* ===== Main content ===== */
 main {
-  margin-left: 220px;       /* leave space for sidebar */
-  margin-top: 70px;         /* leave space for header */
-  padding: 20px;
+  margin-left: 220px;        /* room for sidebar */
+  margin-top: 60px;          /* header height */
   width: calc(100% - 220px);
+  height: calc(100vh - 60px);
+  padding: 0;
+  overflow: auto;
+  background: #f5f7fa;
 }
 
-/* ========== SECTION / CARD ========== */
+/* ===== Section / Card ===== */
 main .card {
   width: 100%;
-  min-height: calc(100vh - 120px); /* minus header & padding */
+  height: 100%;
+  padding: 40px;
   background: #fff;
-  padding: 30px;
-  border-radius: 12px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  border-radius: 12px;
 
-  display: none;       /* hidden by default */
+  display: none;    /* hidden by default */
   opacity: 0;
   transition: opacity 0.3s ease;
 }
@@ -78,22 +81,15 @@ main .card.visible {
   opacity: 1;
 }
 
-/* Optional: center content vertically */
-main .card {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-/* ========== CHART STYLING ========== */
+/* ===== Canvas (Charts) ===== */
 canvas {
   width: 100% !important;
-  height: 80vh !important;   /* make charts tall */
+  height: 90% !important;   /* fill most of the section */
 }
 
-/* ========== TEXT HEADINGS ========== */
+/* ===== Heading ===== */
 .card h2 {
   font-size: 22px;
-  margin-bottom: 20px;
   text-align: center;
+  margin-bottom: 20px;
 }
