@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="style.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
-    /* Add fade + hide styles */
+    
     main .card {
       display: none;
       opacity: 0;
@@ -35,13 +35,13 @@
 </nav>
 
 <main>
-  <!-- Registrations -->
+  
   <section id="registrations" class="card visible">
     <h2>Registration Trend (Apr’22 – Jun’24)</h2>
     <canvas id="regChart"></canvas>
   </section>
 
-  <!-- Taxpayers -->
+  
   <section id="taxpayers" class="card">
     <h2>Active Taxpayers as on 30 Jun 2024</h2>
     <ul>
@@ -54,19 +54,19 @@
     </ul>
   </section>
 
-  <!-- Returns -->
+
   <section id="returns" class="card">
     <h2>Total Returns Filed (Cumulative)</h2>
     <canvas id="returnsChart"></canvas>
   </section>
 
-  <!-- Payments -->
+
   <section id="payments" class="card">
     <h2>Payments Collected 2023-24 (₹ Crore)</h2>
     <canvas id="payChart"></canvas>
   </section>
 
-  <!-- Revenue -->
+ 
   <section id="revenue" class="card">
     <h2>Revenue Share by Business Constitution</h2>
     <canvas id="revChart"></canvas>
@@ -74,7 +74,7 @@
 </main>
 
 <script>
-/* === Chart Data === */
+
 const regLabels = ['Apr 22','Jun 22','Sep 22','Dec 22','Mar 23','Jun 23','Sep 23','Dec 23','Mar 24','Jun 24'];
 const regData   = [3500000,7000000,10500000,14000000,17500000,20000000,22500000,25000000,27000000,27500000];
 
@@ -113,7 +113,7 @@ new Chart(document.getElementById('revChart'), {
   options:{plugins:{legend:{position:'bottom'}}}
 });
 
-/* === Sidebar Navigation === */
+
 document.querySelectorAll('.sidebar a').forEach(link=>{
   link.addEventListener('click',e=>{
     e.preventDefault();
